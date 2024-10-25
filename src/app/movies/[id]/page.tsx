@@ -19,9 +19,9 @@ export const getMovieData = async (id: string) => {
   // Fetch movie details, credits, and recommendations
   const [movieDetailsRes, movieCreditsRes, movieRecommendationsRes] =
     await Promise.all([
-      fetch(movie_details_endPoint(id), { next: { revalidate: 60 } }),
+      fetch(movie_details_endPoint(id)),
       fetch(movie_credits_endPoint(id)),
-      fetch(movie_recommendation_endPoint(id)),
+      fetch(movie_recommendation_endPoint(id), { next: { revalidate: 60 } }),
     ]);
   const movieDetails = await movieDetailsRes.json();
   const movieCredits = await movieCreditsRes.json();
@@ -58,7 +58,7 @@ export default async function MovieDetailsPage({
         <div>
           <h1 className="text-xl font-semibold font-serif">{movieDetails.title}</h1>
           <p className="font-thin py-2 text-justify">{movieDetails.overview}</p>
-          <p className="text-sm font-thin">Release Date: {movieDetails.release_date}</p>
+          <h3 className="text-xl font-sans font-semibold">Release Date: {movieDetails.release_date}</h3>
 
           {/* Genres */}
           <div>
