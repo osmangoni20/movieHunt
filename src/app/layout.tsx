@@ -4,6 +4,7 @@ import "./globals.css";
 
 import { StoreProvider } from "@/redux/StoreProvider";
 import Link from "next/link";
+import TopBar from "@/component/TopBar";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,19 +27,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-         <div className="flex justify-between items-center max-w-[1200px] mx-auto mt-10 mb-0">
-            <button className="cursor-pointer border-2 p-2 border-gray-600 rounded-md hover:bg-[#262F40] hover:text-white text-md">
-              <Link href={"/"}> Popular Movie</Link>
-             </button>
-             <button className="cursor-pointer border-2 p-2 border-gray-600 rounded-md hover:bg-[#262F40] hover:text-white text-md">
-              <Link href={"/watchlist"}> WatchList Movie</Link>
-             </button>
-          </div>
+         <TopBar/>
         <StoreProvider>{children}</StoreProvider>
       </body>
     </html>
