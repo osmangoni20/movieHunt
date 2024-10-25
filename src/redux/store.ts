@@ -1,7 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 // ...
-import cartReducer from '../redux/feature/CartSlice'
-import orderReducer from '../redux/feature/OrderSlice'
+import watchListReducer from './feature/WatchList'
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage/"
 
@@ -9,12 +8,10 @@ const persistConfig={
     key:'root',
     storage
   }
-const persistCartReducer=persistReducer(persistConfig,cartReducer)
-const persistOrderReducer=persistReducer(persistConfig,orderReducer)
+const persistCartReducer=persistReducer(persistConfig,watchListReducer)
 export const store = configureStore({
   reducer: {
-    cartR:persistCartReducer,
-    orderR:persistOrderReducer
+    watchListR:persistCartReducer,
   },
 })
 

@@ -24,7 +24,7 @@ const initialState:TInitialState={
 }
 
 
-const CartSlice=createSlice({
+const WatchList=createSlice({
     name:'cart',
     initialState,
     reducers:{
@@ -99,6 +99,6 @@ const calculateSubTotal=(state: WritableDraft<TInitialState>)=>{
     },0)
 }
 
-export const {addToCart, deleteProduct,updateProduct,clearCart}=CartSlice.actions
+export const {addToCart, deleteProduct,updateProduct,clearCart}=WatchList.actions
 
-export default CartSlice.reducer
+export default WatchList.reducer
