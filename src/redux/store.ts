@@ -1,3 +1,6 @@
+"use client";
+
+
 import { configureStore } from '@reduxjs/toolkit'
 // ...
 import watchlistReducer from '@/redux/feature/WatchList'
@@ -13,6 +16,7 @@ export const store = configureStore({
   reducer: {
     watchListR:persistWatchlistReducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck:false}),
 })
 
 export const persistor = persistStore(store);

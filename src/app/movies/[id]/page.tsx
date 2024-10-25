@@ -4,6 +4,7 @@ import {
   TGenre,
   TRecommendedMovie,
 } from "@/utils/types/MovieType";
+import WatchListButton from "@/utils/ui/WatchListButton";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -53,19 +54,29 @@ export default async function MovieDetailsPage({
           alt={movieDetails?.title || ""}
           width={800}
           height={400}
-          
         />
         <div>
-          <h1 className="text-xl font-semibold font-serif">{movieDetails.title}</h1>
+          <div className="flex justify-between items-center">
+            <h1 className="text-xl font-semibold font-serif">
+              {movieDetails.title}
+            </h1>
+           
+            <WatchListButton movie={movieDetails} />
+           
+          </div>
           <p className="font-thin py-2 text-justify">{movieDetails.overview}</p>
-          <h3 className="text-xl font-sans font-semibold">Release Date: {movieDetails.release_date}</h3>
+          <h3 className="text-xl font-sans font-semibold">
+            Release Date: {movieDetails.release_date}
+          </h3>
 
           {/* Genres */}
           <div>
             <h3 className="text-xl font-sans font-semibold">Genres:</h3>
             <ul>
               {movieDetails?.genres?.map((genre: TGenre) => (
-                <li className="font-thin p-2" key={genre.id}>{genre.name}</li>
+                <li className="font-thin p-2" key={genre.id}>
+                  {genre.name}
+                </li>
               ))}
             </ul>
           </div>
@@ -74,11 +85,13 @@ export default async function MovieDetailsPage({
           <div>
             <h3 className="text-xl font-sans font-semibold">Cast:</h3>
             <ul>
-              {movieCredits?.cast?.slice(0, 12).map((actor: TCastMember,index:number) => (
-                <li className="font-thin border-b-2  p-2" key={actor.cast_id}>
-                 {index+1}: {actor.name} as {actor.character}
-                </li>
-              ))}
+              {movieCredits?.cast
+                ?.slice(0, 12)
+                .map((actor: TCastMember, index: number) => (
+                  <li className="font-thin border-b-2  p-2" key={actor.cast_id}>
+                    {index + 1}: {actor.name} as {actor.character}
+                  </li>
+                ))}
             </ul>
           </div>
         </div>
@@ -92,20 +105,26 @@ export default async function MovieDetailsPage({
         </h3>
         <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5">
           {movieRecommendations?.results?.map((movie: TRecommendedMovie) => (
-            <li key={movie?.id} className='cursor-pointer'>
-            <Link href={`/movies/${movie?.id}`}>
-         <Image
-           src={`https://image.tmdb.org/t/p/w300${movie?.poster_path}`}
-           alt={movie?.title||""}
-           width={200}
-           height={300}
-           loading="lazy"
-         />
-         <h3>{movie?.title}</h3>
-         <p><span className='font-semibold'>Release Date: </span>{movie?.release_date}</p>
-         <p><span className='font-semibold'>Rating:</span> {movie?.vote_average}</p>
-         </Link>
-       </li>
+            <li key={movie?.id} className="cursor-pointer">
+              <Link href={`/movies/${movie?.id}`}>
+                <Image
+                  src={`https://image.tmdb.org/t/p/w300${movie?.poster_path}`}
+                  alt={movie?.title || ""}
+                  width={200}
+                  height={300}
+                  loading="lazy"
+                />
+                <h3>{movie?.title}</h3>
+                <p>
+                  <span className="font-semibold">Release Date: </span>
+                  {movie?.release_date}
+                </p>
+                <p>
+                  <span className="font-semibold">Rating:</span>{" "}
+                  {movie?.vote_average}
+                </p>
+              </Link>
+            </li>
           ))}
         </ul>
       </div>

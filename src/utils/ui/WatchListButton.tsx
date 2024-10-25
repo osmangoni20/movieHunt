@@ -1,37 +1,33 @@
 "use client";
 import {
-  addMovieInWatchList,
-  deleteMovieFromWatchlist,
+  addToWatchlist,
+  removeFromWatchlist,
 } from "@/redux/feature/WatchList";
-import { useAppSelector } from "@/redux/hooks";
-import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { TMovie } from "../types/MovieType";
 
 const WatchListButton = ({ movie }: { movie: TMovie }) => {
-  const [isWatchListMovie, setIsWatchListMovie] = useState(false);
   const { movies } = useAppSelector((state) => state.watchListR);
-  const isExist = movies.filter((singleMovie) => (singleMovie.id = movie.id));
+  console.log(movies)
+  const dispatch = useAppDispatch();
+  const isExist = movies?.filter((singleMovie) => (singleMovie.id === movie.id));
 
-  if (isExist) {
-    setIsWatchListMovie(true);
-  }
   const HandleWatchList = () => {
-    if (isWatchListMovie) {
-      deleteMovieFromWatchlist(movie.id);
+    if (isExist.length>0) {
+      dispatch(removeFromWatchlist(movie.id));
     } else {
-      addMovieInWatchList(movie);
+      dispatch(addToWatchlist(movie));
     }
   };
   return (
-    <div>
+    <div className="w-[200px]">
       <button
         className={`px-4 py-2 rounded-lg text-white ${
-          isWatchListMovie ? "bg-[#262F40]" : "bg-red-600"
+          isExist?.length>0 ? "bg-red-600 " : "bg-[#262F40]"
         }`}
         onClick={HandleWatchList}
       >
-        {" "}
-        {isWatchListMovie ? "Remove WatchList" : "Add to Watchlist"}
+        {isExist?.length>0 ? "Remove WatchList" : "Add to Watchlist"}
       </button>
     </div>
   );

@@ -16,7 +16,8 @@ export default function Page() {
   return (
     <div>
       <QueryClientProvider client={clientQuery}>
-        <div className="py-10">
+        <div>
+         
           <form onSubmit ={HandleSubmit}className="flex justify-center">
             <div className="flex items-center rounded border-2 border-[#262F40]">
             <input type="text" className="h-[40px] p-2 focus:outline-none focus:border-transparent w-[400px] text-md font-semibold" placeholder="Search Movie" name="searchValue"></input>

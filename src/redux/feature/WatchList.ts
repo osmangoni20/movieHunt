@@ -1,3 +1,5 @@
+"use client";
+
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { TMovie } from '@/utils/types/MovieType'
 
@@ -15,15 +17,15 @@ export const WatchlistSlice=createSlice({
     name:"watchlist",
     initialState,
     reducers:{
-        addMovieInWatchList:(state,action:PayloadAction<TMovie>)=>{
+        addToWatchlist:(state:TInitialState,action:PayloadAction<TMovie>)=>{
             state.movies.push(action.payload)
         },
-        deleteMovieFromWatchlist:(state,action:PayloadAction<number>)=>{
+        removeFromWatchlist:(state:TInitialState,action:PayloadAction<number>)=>{
             state.movies=state.movies.filter(movie=>movie.id!==action.payload)
         }
     }
 })
 
-export const {addMovieInWatchList,deleteMovieFromWatchlist}=WatchlistSlice.actions
+export const {addToWatchlist,removeFromWatchlist}=WatchlistSlice.actions
 
 export default WatchlistSlice.reducer

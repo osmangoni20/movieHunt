@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { Provider } from "react-redux";
-import { store } from "@/redux/store";
+
+import { StoreProvider } from "@/redux/StoreProvider";
+import Link from "next/link";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -30,10 +31,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Provider store={store}>
-        {children}
-        </Provider>
-      
+         <div className="flex justify-between items-center max-w-[1200px] mx-auto mt-10 mb-0">
+            <button className="cursor-pointer border-2 p-2 border-gray-600 rounded-md hover:bg-[#262F40] hover:text-white text-md">
+              <Link href={"/"}> Popular Movie</Link>
+             </button>
+             <button className="cursor-pointer border-2 p-2 border-gray-600 rounded-md hover:bg-[#262F40] hover:text-white text-md">
+              <Link href={"/watchlist"}> WatchList Movie</Link>
+             </button>
+          </div>
+        <StoreProvider>{children}</StoreProvider>
       </body>
     </html>
   );
