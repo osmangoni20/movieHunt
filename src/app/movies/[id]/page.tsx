@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   TCastMember,
   TGenre,
@@ -9,40 +8,39 @@ import Image from "next/image";
 import Link from "next/link";
 
 const API_KEY = "891e0007e102a4819f37022133321f24";
-const movie_details_endPoint = (id: string) =>
+
+const movieDetailsEndpoint = (id: string) =>
   `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`;
-const movie_credits_endPoint = (id: string) =>
+
+const movieCreditsEndpoint = (id: string) =>
   `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}`;
-const movie_recommendation_endPoint = (id: string) =>
+
+const movieRecommendationsEndpoint = (id: string) =>
   `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${API_KEY}`;
 
-export const getMovieData = async (id: string) => {
-  // Fetch movie details, credits, and recommendations
+const getMovieData = async (id: string) => {
   const [movieDetailsRes, movieCreditsRes, movieRecommendationsRes] =
     await Promise.all([
-      fetch(movie_details_endPoint(id)),
-      fetch(movie_credits_endPoint(id)),
-      fetch(movie_recommendation_endPoint(id), { next: { revalidate: 60 } }),
+      fetch(movieDetailsEndpoint(id)),
+      fetch(movieCreditsEndpoint(id)),
+      fetch(movieRecommendationsEndpoint(id), { next: { revalidate: 60 } }),
     ]);
+
+  if (!movieDetailsRes.ok) {
+    throw new Error('Failed to fetch movie details');
+  }
+
   const movieDetails = await movieDetailsRes.json();
   const movieCredits = await movieCreditsRes.json();
   const movieRecommendations = await movieRecommendationsRes.json();
 
-  if (!movieDetails) {
-    return { notFound: true };
-  }
-
   return { movieDetails, movieCredits, movieRecommendations };
 };
 
-export default async function Page({
-  params,
-}: {
-  params: { id: string };
-}) {
-  const { id } = await params;
+export default async function MovieDetailsPage({ params }: { params: { id: string } }) {
+  const { id } = params; // No need to await params
 
-  const { movieDetails, movieCredits, movieRecommendations } =await getMovieData(id);
+  const { movieDetails, movieCredits, movieRecommendations } = await getMovieData(id);
 
   return (
     <div className="mx-auto my-16 max-w-[1200px]">
@@ -59,9 +57,7 @@ export default async function Page({
             <h1 className="text-xl font-semibold font-serif">
               {movieDetails.title}
             </h1>
-           
             <WatchListButton movie={movieDetails} />
-           
           </div>
           <p className="font-thin py-2 text-justify">{movieDetails.overview}</p>
           <h3 className="text-xl font-sans font-semibold">
@@ -86,9 +82,9 @@ export default async function Page({
             <ul>
               {movieCredits?.cast
                 ?.slice(0, 12)
-                .map((actor: TCastMember, index: number) => (
-                  <li className="font-thin border-b-2  p-2" key={actor.cast_id}>
-                    {index + 1}: {actor.name} as {actor.character}
+                .map((actor: TCastMember) => (
+                  <li className="font-thin border-b-2 p-2" key={actor.cast_id}>
+                    {actor.name} as {actor.character}
                   </li>
                 ))}
             </ul>
@@ -130,7 +126,5 @@ export default async function Page({
     </div>
   );
 }
-export async function generateStaticParams() {
-  // Pre-build paths if needed
-  return [];
-}
+
+// No need for generateStaticParams for dynamic routes
