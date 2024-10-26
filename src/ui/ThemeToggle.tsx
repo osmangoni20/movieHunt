@@ -27,7 +27,7 @@ export default function DarkModeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="text-md font-semibold px-4 py-2 border-2  border-gray-600 rounded-md bg-gray-800  dark:bg-gray-600 text-gray-600 dark:text-white"
+      className="text-md font-semibold px-4 py-2 border-2  border-gray-600 rounded-md  text-gray-700  dark:bg-gray-500  dark:text-white"
     >
       {theme === "light" ? "Dark" : "Light"} Mode
     </button>

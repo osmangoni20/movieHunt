@@ -4,7 +4,7 @@ import {
   removeFromWatchlist,
 } from "@/redux/feature/WatchList";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { TMovie } from "../types/MovieType";
+import { TMovie } from "../utils/types/MovieType";
 
 const WatchListButton = ({ movie }: { movie: TMovie }) => {
   const { movies } = useAppSelector((state) => state.watchListR);
@@ -23,7 +23,7 @@ const WatchListButton = ({ movie }: { movie: TMovie }) => {
     <div className="w-[200px]">
       <button
         className={`px-4 py-2 rounded-lg text-white ${
-          isExist?.length>0 ? "bg-red-600 " : "bg-[#262F40]"
+          isExist?.length>0 ? "bg-red-600 " : " dark:bg-white dark:text-[#262F40] dark:border-2 bg-[#262F40]"
         }`}
         onClick={HandleWatchList}
       >

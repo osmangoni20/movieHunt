@@ -4,7 +4,7 @@
 import Link from "next/link";
 
 import { usePathname } from 'next/navigation'
-import ThemeToggle from './ThemeToggle'
+import ThemeToggle from '../ui/ThemeToggle'
 const TopBar = () => {
     const currentRoute =usePathname()
     return (

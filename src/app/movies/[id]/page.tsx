@@ -4,7 +4,7 @@ import {
   TGenre,
   TRecommendedMovie,
 } from "@/utils/types/MovieType";
-import WatchListButton from "@/utils/ui/WatchListButton";
+import WatchListButton from "@/ui/WatchListButton";
 import Image from "next/image";
 import Link from "next/link";
 
