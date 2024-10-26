@@ -8,6 +8,8 @@ import { getMovies } from "@/utils/api/getMovies";
 import Link from "next/link";
 
 const MovieList = ({ searchTerm }: { searchTerm: string }) => {
+
+
   const { ref, inView } = useInView({
     triggerOnce: false,
     rootMargin: "100px",
@@ -50,7 +52,7 @@ const MovieList = ({ searchTerm }: { searchTerm: string }) => {
 
   if (isLoading)
     return (
-      <div className="flex justify-center">
+      <div className="flex justify-center my-5">
         <p className="loading_spinner"></p>
       </div>
     );
