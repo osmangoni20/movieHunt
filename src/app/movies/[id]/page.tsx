@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   TCastMember,
   TGenre,
@@ -40,9 +39,9 @@ export default async function MovieDetailsPage({
 }: {
   params: { id: string };
 }) {
-  const { id } = await params;
+  const { id } = await params; 
 
-  const { movieDetails, movieCredits, movieRecommendations }:any = getMovieData(id);
+  const { movieDetails, movieCredits, movieRecommendations } = await getMovieData(id); // Await the getMovieData function
 
   return (
     <div className="mx-auto my-16 max-w-[1200px]">
@@ -59,9 +58,7 @@ export default async function MovieDetailsPage({
             <h1 className="text-xl font-semibold font-serif">
               {movieDetails.title}
             </h1>
-           
             <WatchListButton movie={movieDetails} />
-           
           </div>
           <p className="font-thin py-2 text-justify">{movieDetails.overview}</p>
           <h3 className="text-xl font-sans font-semibold">
@@ -86,9 +83,9 @@ export default async function MovieDetailsPage({
             <ul>
               {movieCredits?.cast
                 ?.slice(0, 12)
-                .map((actor: TCastMember, index: number) => (
-                  <li className="font-thin border-b-2  p-2" key={actor.cast_id}>
-                    {index + 1}: {actor.name} as {actor.character}
+                .map((actor: TCastMember) => (
+                  <li className="font-thin border-b-2 p-2" key={actor.cast_id}>
+                    {actor.name} as {actor.character}
                   </li>
                 ))}
             </ul>
@@ -130,6 +127,7 @@ export default async function MovieDetailsPage({
     </div>
   );
 }
+
 export async function generateStaticParams() {
   // Pre-build paths if needed
   return [];
