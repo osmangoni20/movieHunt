@@ -35,7 +35,7 @@ export const getMovieData = async (id: string) => {
   return { movieDetails, movieCredits, movieRecommendations };
 };
 
-export default async function MovieDetailsPage({
+export default async function Page({
   params,
 }: {
   params: { id: string };
