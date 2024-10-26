@@ -42,8 +42,7 @@ export default async function MovieDetailsPage({
 }) {
   const { id } = await params;
 
-  const { movieDetails, movieCredits, movieRecommendations } =
-    await getMovieData(id);
+  const { movieDetails, movieCredits, movieRecommendations }:any = getMovieData(id);
 
   return (
     <div className="mx-auto my-16 max-w-[1200px]">
