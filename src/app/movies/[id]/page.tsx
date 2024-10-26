@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   TCastMember,
   TGenre,
@@ -37,8 +38,8 @@ const getMovieData = async (id: string) => {
   return { movieDetails, movieCredits, movieRecommendations };
 };
 
-export default async function MovieDetailsPage({ params }: { params: { id: string } }) {
-  const { id } = params; // No need to await params
+export default async function MovieDetailsPage({ params }:any) {
+  const { id } = await params; 
 
   const { movieDetails, movieCredits, movieRecommendations } = await getMovieData(id);
 
