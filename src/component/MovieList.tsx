@@ -66,11 +66,12 @@ const MovieList = ({ searchTerm }: { searchTerm: string }) => {
   return (
     <div className="max-w-[1200px] mx-auto p-5">
       <h1 className="text-3xl py-2 font-semibold font-sans">Popular Movies</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
+      <div className="grid grid-cols-2 sm:grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-5">
         {allMovies?.map((movie) => (
-          <div key={movie?.id} className="cursor-pointer">
+          <div key={movie?.id} className="cursor-pointer   rounded-b-md  dark:text-white">
             <Link href={`/movies/${movie?.id}`}>
               <Image
+              className="max-w-full"
                 src={`https://image.tmdb.org/t/p/w300${movie?.poster_path}`}
                 alt={movie?.title || ""}
                 width={200}

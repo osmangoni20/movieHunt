@@ -15,9 +15,9 @@ console.log(movies)
       <h1 className="text-3xl py-4 font-semibold font-sans">
         WatchList Movies
       </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
         {movies?.map((movie) => (
-          <div key={movie?.id} className="cursor-pointer">
+          <div key={movie?.id} className="cursor-pointer p-2 rounded-b-md dark:bg-white dark:text-gray-800">
             <Link href={`/movies/${movie?.id}`}>
               <Image
                 src={`https://image.tmdb.org/t/p/w300${movie?.poster_path}`}
@@ -37,7 +37,7 @@ console.log(movies)
                 {movie?.vote_average}
               </p>
             </Link>
-            <div className="flex justify-center w-full">
+            <div className="flex justify-center w-full my-3">
                 <WatchListButton movie={movie}></WatchListButton>
             </div>
           </div>

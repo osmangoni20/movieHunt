@@ -23,9 +23,9 @@ export default function Page() {
       <QueryClientProvider client={clientQuery}>
         <div>
          
-          <form onSubmit ={handleSubmit(handleSearchTerm)}className="flex justify-center">
-            <div className="flex items-center rounded border-2 border-[#262F40]">
-            <input type="text" className="h-[40px] p-2 focus:outline-none focus:border-transparent w-[400px] text-md font-semibold" defaultValue={""} placeholder="Search Movie" {...register("searchValue")}></input>
+          <form onSubmit ={handleSubmit(handleSearchTerm)}className="flex justify-center my-4">
+            <div className="flex items-center rounded border-2 border-[#262F40] dark:border-gray-500">
+            <input type="text" className="h-[40px] sm:w-[300px] lg:w-[400px] md:w-[400px] p-2 focus:outline-none focus:border-transparent  text-md font-semibold" defaultValue={""} placeholder="Search Movie" {...register("searchValue")}></input>
             <button type="submit" className="p-2 bg-[#262F40] h-[40px] text-xl font-semibold text-white">Search</button>
             </div>
           </form>
