@@ -17,7 +17,7 @@ console.log(movies)
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
         {movies?.map((movie) => (
-          <div key={movie?.id} className="cursor-pointer p-2 rounded-b-md dark:bg-white dark:text-gray-800">
+          <div key={movie?.id} className="cursor-pointer  rounded-b-md dark:text-white  ">
             <Link href={`/movies/${movie?.id}`}>
               <Image
                 src={`https://image.tmdb.org/t/p/w300${movie?.poster_path}`}
